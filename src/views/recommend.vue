@@ -9,6 +9,7 @@
 </template>
 
 <script>
+// 引入组件
 import { getRecommend } from '@/service/recommend'
 import Slider from '../components/base/slider/slider'
 
