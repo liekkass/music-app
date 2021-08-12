@@ -1,31 +1,66 @@
 <template>
-  <div class="recommend">
-    <div class="slider-warpper">
-      <div class="slider-content">
-        <slider v-if="sliders.length" :sliders="sliders"></slider>
+  <div class="recommend" v-loading="loading">
+    <scroll class="recommend-content">
+      <div>
+        <div class="slider-warpper">
+          <div class="slider-content">
+            <slider v-if="sliders.length" :sliders="sliders"></slider>
+          </div>
+        </div>
+        <div class="recommend-list">
+          <h1 class="list-title" v-show="!loading">热门歌单推荐</h1>
+          <ul>
+            <li
+              v-for="item in albums"
+              :key="item.id"
+              class="item"
+            >
+              <div class="icon">
+                <img v-lazy="item.pic" width="60" height="60">
+              </div>
+              <div class="text">
+                <h2 class="name">
+                  {{item.username}}
+                </h2>
+                <p class="title">
+                  {{item.title}}
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
+    </scroll>
   </div>
 </template>
 
 <script>
 // 引入组件
 import { getRecommend } from '@/service/recommend'
-import Slider from '../components/base/slider/slider'
+import Slider from '@/components/base/slider/slider'
+import Scroll from '@/components/base/scroll/scroll'
 
 export default {
   name: 'recommend.vue',
   components: {
-    Slider
+    Slider,
+    Scroll
   },
   data() {
     return {
-      sliders: []
+      sliders: [],
+      albums: []
+    }
+  },
+  computed: {
+    loading() {
+      return !this.sliders.length && !this.albums.length
     }
   },
   async created () {
     const result = await getRecommend()
     this.sliders = result.sliders
+    this.albums = result.albums
   }
 }
 </script>
