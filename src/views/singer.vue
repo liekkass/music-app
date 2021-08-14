@@ -1,12 +1,23 @@
 <template>
   <div class="singer" v-loading="!singerList.length">
-    <index-list :data="singerList"></index-list>
+    <index-list
+      :data="singerList"
+      @select="selectSinger">
+    </index-list>
+    <router-view v-slot="{ Component }">
+      <transition appear name="slide">
+        <component :is="Component"  :singer="selectedSinger"/>
+      </transition>
+    </router-view>
   </div>
 </template>
 
 <script>
-import { getSingerList } from '../service/singer'
+import { getSingerList } from '@/service/singer'
 import IndexList from '@/components/base/index-list/index-list'
+import { SINGER_KEY } from '@/assets/js/constant'
+import storage from 'good-storage'
+
 export default {
   name: 'singer.vue',
   components: {
@@ -14,7 +25,20 @@ export default {
   },
   data() {
     return {
-      singerList: []
+      singerList: [],
+      selectedSinger: null
+    }
+  },
+  methods: {
+    selectSinger(singer) {
+      this.selectedSinger = singer
+      this.cacheSinger(singer)
+      this.$router.push({
+        path: `/singer/${singer.mid}`
+      })
+    },
+    cacheSinger(singer) {
+      storage.session.set(SINGER_KEY, singer)
     }
   },
   async created () {
