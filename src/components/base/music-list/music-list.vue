@@ -12,19 +12,19 @@
       :style="bgImageStyle"
       ref="bgImage"
     >
-<!--      <div-->
-<!--        class="play-btn-wrapper"-->
-<!--        :style="playBtnStyle"-->
-<!--      >-->
-<!--        <div-->
-<!--          v-show="songs.length > 0"-->
-<!--          class="play-btn"-->
-<!--          @click="random"-->
-<!--        >-->
-<!--          <i class="icon-play"></i>-->
-<!--          <span class="text">随机播放全部</span>-->
-<!--        </div>-->
-<!--      </div>-->
+      <div
+        class="play-btn-wrapper"
+        :style="playBtnStyle"
+      >
+        <div
+          v-show="songs.length > 0"
+          class="play-btn"
+          @click="random"
+        >
+          <i class="icon-play"></i>
+          <span class="text">随机播放全部</span>
+        </div>
+      </div>
       <div
         class="filter"
         :style="filterStyle"
@@ -41,6 +41,7 @@
       <div class="song-list-wrapper">
         <song-list
           :songs="songs"
+          @select="selectItem"
           :rank="rank"
         ></song-list>
       </div>
@@ -52,6 +53,7 @@
 import SongList from '@/components/base/song-list/song-list'
 import Scroll from '@/components/base/scroll/scroll'
 
+import { mapActions } from 'vuex'
 const RESERVED_HEIGHT = 40
 
 export default {
@@ -87,15 +89,15 @@ export default {
     noResult() {
       return !this.loading && !this.songs.length
     },
-    // playBtnStyle() {
-    //   let display = ''
-    //   if (this.scrollY >= this.maxTranslateY) {
-    //     display = 'none'
-    //   }
-    //   return {
-    //     display
-    //   }
-    // },
+    playBtnStyle() {
+      let display = ''
+      if (this.scrollY >= this.maxTranslateY) {
+        display = 'none'
+      }
+      return {
+        display
+      }
+    },
     bgImageStyle() {
       const scrollY = this.scrollY
       let zIndex = 0
@@ -163,11 +165,11 @@ export default {
     },
     random() {
       this.randomPlay(this.songs)
-    }
-    // ...mapActions([
-    //   'selectPlay',
-    //   'randomPlay'
-    // ])
+    },
+    ...mapActions([
+      'selectPlay',
+      'randomPlay'
+    ])
   }
 }
 </script>
