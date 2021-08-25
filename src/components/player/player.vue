@@ -34,7 +34,7 @@
               :style="middleLStyle">
               <div
                 ref="cdWrapperRef"
-                class="cd-wrapper topBox">
+                class="cd-wrapper">
                 <div
                   ref="cdRef"
                   class="cd">
@@ -514,9 +514,6 @@ export default {
             font-size: $font-size-medium;
           }
         }
-      }
-      .topBox {
-        margin-top: 10px;
       }
     }
     .bottom {
