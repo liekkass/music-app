@@ -250,9 +250,6 @@ export default {
           index = list.length - 1
         }
         store.commit('setCurrentIndex', index)
-        if (!playing.value) {
-          store.commit('setPlayingState', true)
-        }
       }
     }
 
@@ -270,9 +267,6 @@ export default {
           index = 0
         }
         store.commit('setCurrentIndex', index)
-        if (!playing.value) {
-          store.commit('setPlayingState', true)
-        }
       }
     }
 

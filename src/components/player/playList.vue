@@ -64,12 +64,12 @@
             <span>关闭</span>
           </div>
         </div>
-<!--        <confirm-->
-<!--          ref="confirmRef"-->
-<!--          @confirm="confirmClear"-->
-<!--          text="是否清空播放列表？"-->
-<!--          confirm-btn-text="清空"-->
-<!--        ></confirm>-->
+        <confirm
+          ref="confirmRef"
+          @confirm="confirmClear"
+          text="是否清空播放列表？"
+          confirm-btn-text="清空"
+        ></confirm>
 <!--        <add-song ref="addSongRef"></add-song>-->
       </div>
     </transition>
@@ -78,7 +78,7 @@
 
 <script>
 import Scroll from '@/components/base/scroll/scroll'
-// import Confirm from '@/components/base/confirm/confirm'
+import Confirm from '@/components/base/confirm/confirm'
 // import AddSong from '@/components/add-song/add-song'
 import { ref, computed, nextTick, watch } from 'vue'
 import { useStore } from 'vuex'
@@ -89,7 +89,7 @@ export default {
   name: 'playlist',
   components: {
     // AddSong,
-    // Confirm,
+    Confirm,
     Scroll
   },
   setup() {

@@ -12,7 +12,7 @@
 <script>
 import { getSingerDetail } from '@/service/singer'
 import { processSongs } from '@/service/song'
-import MusicList from '@/components/base/music-list/music-list'
+import MusicList from '@/components/music-list/music-list'
 import { SINGER_KEY } from '@/assets/js/constant'
 import storage from 'good-storage'
 

@@ -25,45 +25,45 @@
 </template>
 
 <script>
-  export default {
-    name: 'confirm',
-    props: {
-      text: {
-        type: String,
-        default: ''
-      },
-      confirmBtnText: {
-        type: String,
-        default: '确定'
-      },
-      cancelBtnText: {
-        type: String,
-        default: '取消'
-      }
+export default {
+  name: 'confirm',
+  props: {
+    text: {
+      type: String,
+      default: ''
     },
-    data() {
-      return {
-        visible: false
-      }
+    confirmBtnText: {
+      type: String,
+      default: '确定'
     },
-    emits: ['confirm', 'cancel'],
-    methods: {
-      confirm() {
-        this.hide()
-        this.$emit('confirm')
-      },
-      cancel() {
-        this.hide()
-        this.$emit('cancel')
-      },
-      hide() {
-        this.visible = false
-      },
-      show() {
-        this.visible = true
-      }
+    cancelBtnText: {
+      type: String,
+      default: '取消'
+    }
+  },
+  data() {
+    return {
+      visible: false
+    }
+  },
+  emits: ['confirm', 'cancel'],
+  methods: {
+    confirm() {
+      this.hide()
+      this.$emit('confirm')
+    },
+    cancel() {
+      this.hide()
+      this.$emit('cancel')
+    },
+    hide() {
+      this.visible = false
+    },
+    show() {
+      this.visible = true
     }
   }
+}
 </script>
 
 <style scoped lang="scss">
