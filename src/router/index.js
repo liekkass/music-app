@@ -4,6 +4,8 @@ import Search from '@/views/search'
 import Singer from '@/views/singer'
 import TopList from '@/views/top-list'
 import SingerDetail from '@/views/singer-detail'
+import Album from '@/views/album'
+import TopDetail from '@/views/top-detail'
 
 const routes = [
   {
@@ -16,7 +18,13 @@ const routes = [
     meta: {
       hidden: true,
       title: '音乐播放器'
-    }
+    },
+    children: [
+      {
+        path: ':id',
+        component: Album
+      }
+    ]
   },
   {
     path: '/singer',
@@ -30,7 +38,13 @@ const routes = [
   },
   {
     path: '/top-list',
-    component: TopList
+    component: TopList,
+    children: [
+      {
+        path: ':id',
+        component: TopDetail
+      }
+    ]
   },
   {
     path: '/search',

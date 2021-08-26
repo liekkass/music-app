@@ -2,7 +2,7 @@
   <div class="recommend" v-loading="loading">
     <scroll class="recommend-content">
       <div>
-        <div class="slider-warpper">
+        <div class="slider-wrapper">
           <div class="slider-content">
             <slider v-if="sliders.length" :sliders="sliders"></slider>
           </div>
@@ -12,15 +12,16 @@
           <ul>
             <li
               v-for="item in albums"
-              :key="item.id"
               class="item"
+              :key="item.id"
+              @click="selectItem(item)"
             >
               <div class="icon">
-                <img v-lazy="item.pic" width="60" height="60">
+                <img width="60" height="60" v-lazy="item.pic">
               </div>
               <div class="text">
                 <h2 class="name">
-                  {{item.username}}
+                  {{ item.username }}
                 </h2>
                 <p class="title">
                   {{item.title}}
@@ -31,17 +32,23 @@
         </div>
       </div>
     </scroll>
+    <router-view v-slot="{ Component }">
+      <transition appear name="slide">
+        <component :is="Component" :data="selectedAlbum"/>
+      </transition>
+    </router-view>
   </div>
 </template>
 
 <script>
-// 引入组件
 import { getRecommend } from '@/service/recommend'
 import Slider from '@/components/base/slider/slider'
 import Scroll from '@/components/wrap-scroll'
+import storage from 'good-storage'
+import { ALBUM_KEY } from '@/assets/js/constant'
 
 export default {
-  name: 'recommend.vue',
+  name: 'recommend',
   components: {
     Slider,
     Scroll
@@ -49,7 +56,8 @@ export default {
   data() {
     return {
       sliders: [],
-      albums: []
+      albums: [],
+      selectedAlbum: null
     }
   },
   computed: {
@@ -57,10 +65,22 @@ export default {
       return !this.sliders.length && !this.albums.length
     }
   },
-  async created () {
+  async created() {
     const result = await getRecommend()
     this.sliders = result.sliders
     this.albums = result.albums
+  },
+  methods: {
+    selectItem(album) {
+      this.selectedAlbum = album
+      this.cacheAlbum(album)
+      this.$router.push({
+        path: `/recommend/${album.id}`
+      })
+    },
+    cacheAlbum(album) {
+      storage.session.set(ALBUM_KEY, album)
+    }
   }
 }
 </script>

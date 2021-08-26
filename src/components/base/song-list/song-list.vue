@@ -71,15 +71,15 @@ export default {
         width: 25px;
         height: 24px;
         background-size: 25px 24px;
-        //&.icon0 {
-        //  @include bg-image('first');
-        //}
-        //&.icon1 {
-        //  @include bg-image('second');
-        //}
-        //&.icon2 {
-        //  @include bg-image('third');
-        //}
+        &.icon0 {
+          @include bg-image('first');
+        }
+        &.icon1 {
+          @include bg-image('second');
+        }
+        &.icon2 {
+          @include bg-image('third');
+        }
       }
       .text {
         color: $color-theme;
