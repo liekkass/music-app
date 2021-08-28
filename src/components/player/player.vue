@@ -130,7 +130,7 @@ import useCd from './use-cd'
 import useLyric from './use-lyric'
 import useMiddleInteractive from './use-middle-interactive'
 import useAnimation from './use-animation'
-// import usePlayHistory from './use-play-history'
+import usePlayHistory from './use-play-history'
 import ProgressBar from './progress-bar'
 import Scroll from '@/components/base/scroll/scroll'
 import MiniPlayer from './mini-player'
@@ -170,7 +170,7 @@ export default {
     })
     const { currentShow, middleLStyle, middleRStyle, onMiddleTouchStart, onMiddleTouchMove, onMiddleTouchEnd } = useMiddleInteractive()
     const { cdWrapperRef, enter, afterEnter, leave, afterLeave } = useAnimation()
-    // const { savePlay } = usePlayHistory()
+    const { savePlay } = usePlayHistory()
 
     // computed
     const playlist = computed(() => store.state.playlist)
@@ -283,7 +283,7 @@ export default {
       }
       songReady.value = true
       playLyric()
-      // savePlay (currentSong.value)
+      savePlay(currentSong.value)
     }
 
     function error() {

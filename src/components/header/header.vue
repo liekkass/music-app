@@ -2,6 +2,9 @@
   <div class="header">
     <span class="icon"></span>
     <h1 class="text">QQ音乐</h1>
+    <router-link class="mine" to="/user-center">
+      <i class="icon-mine"></i>
+    </router-link>
   </div>
 </template>
 
