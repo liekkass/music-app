@@ -21,30 +21,30 @@
 </template>
 
 <script>
-export default {
-  name: 'search-list',
-  props: {
-    searches: {
-      type: Array,
-      default() {
-        return []
+  export default {
+    name: 'search-list',
+    props: {
+      searches: {
+        type: Array,
+        default() {
+          return []
+        }
+      },
+      showDelete: {
+        type: Boolean,
+        default: true
       }
     },
-    showDelete: {
-      type: Boolean,
-      default: true
-    }
-  },
-  emits: ['select', 'delete'],
-  methods: {
-    selectItem(item) {
-      this.$emit('select', item)
-    },
-    deleteItem(item) {
-      this.$emit('delete', item)
+    emits: ['select', 'delete'],
+    methods: {
+      selectItem(item) {
+        this.$emit('select', item)
+      },
+      deleteItem(item) {
+        this.$emit('delete', item)
+      }
     }
   }
-}
 </script>
 
 <style lang="scss" scoped>

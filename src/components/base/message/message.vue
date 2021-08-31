@@ -9,33 +9,33 @@
 </template>
 
 <script>
-export default {
-  name: 'message',
-  props: {
-    delay: {
-      type: Number,
-      default: 1000
-    }
-  },
-  data() {
-    return {
-      visible: false
-    }
-  },
-  methods: {
-    show() {
-      this.visible = true
-      clearTimeout(this.timer)
-      this.timer = setTimeout(() => {
-        this.hide()
-      }, this.delay)
+  export default {
+    name: 'message',
+    props: {
+      delay: {
+        type: Number,
+        default: 2000
+      }
     },
-    hide() {
-      clearTimeout(this.timer)
-      this.visible = false
+    data() {
+      return {
+        visible: false
+      }
+    },
+    methods: {
+      show() {
+        this.visible = true
+        clearTimeout(this.timer)
+        this.timer = setTimeout(() => {
+          this.hide()
+        }, this.delay)
+      },
+      hide() {
+        clearTimeout(this.timer)
+        this.visible = false
+      }
     }
   }
-}
 </script>
 
 <style scoped lang="scss">

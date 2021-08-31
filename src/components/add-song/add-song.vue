@@ -68,99 +68,99 @@
 </template>
 
 <script>
-import SearchInput from '@/components/search/search-input'
-import Suggest from '@/components/search/suggest'
-import Switches from '@/components/base/switches/switches'
-import Scroll from '@/components/base/scroll/scroll'
-import SongList from '@/components/base/song-list/song-list'
-import SearchList from '@/components/base/search-list/search-list'
-import Message from '@/components/base/message/message'
-import { ref, computed, nextTick, watch } from 'vue'
-import { useStore } from 'vuex'
-import useSearchHistory from '@/components/search/use-search-history'
+  import SearchInput from '@/components/search/search-input'
+  import Suggest from '@/components/search/suggest'
+  import Switches from '@/components/base/switches/switches'
+  import Scroll from '@/components/base/scroll/scroll'
+  import SongList from '@/components/base/song-list/song-list'
+  import SearchList from '@/components/base/search-list/search-list'
+  import Message from '@/components/base/message/message'
+  import { ref, computed, nextTick, watch } from 'vue'
+  import { useStore } from 'vuex'
+  import useSearchHistory from '@/components/search/use-search-history'
 
-export default {
-  name: 'add-song',
-  components: {
-    SearchInput,
-    Suggest,
-    Switches,
-    Scroll,
-    SongList,
-    SearchList,
-    Message
-  },
-  setup() {
-    const visible = ref(false)
-    const query = ref('')
-    const currentIndex = ref(0)
-    const scrollRef = ref(null)
-    const messageRef = ref(null)
+  export default {
+    name: 'add-song',
+    components: {
+      SearchInput,
+      Suggest,
+      Switches,
+      Scroll,
+      SongList,
+      SearchList,
+      Message
+    },
+    setup() {
+      const visible = ref(false)
+      const query = ref('')
+      const currentIndex = ref(0)
+      const scrollRef = ref(null)
+      const messageRef = ref(null)
 
-    const store = useStore()
-    const searchHistory = computed(() => store.state.searchHistory)
-    const playHistory = computed(() => store.state.playHistory)
+      const store = useStore()
+      const searchHistory = computed(() => store.state.searchHistory)
+      const playHistory = computed(() => store.state.playHistory)
 
-    const { saveSearch } = useSearchHistory()
+      const { saveSearch } = useSearchHistory()
 
-    watch(query, async () => {
-      await nextTick()
-      refreshScroll()
-    })
+      watch(query, async () => {
+        await nextTick()
+        refreshScroll()
+      })
 
-    async function show() {
-      visible.value = true
+      async function show() {
+        visible.value = true
 
-      await nextTick()
-      refreshScroll()
-    }
+        await nextTick()
+        refreshScroll()
+      }
 
-    function hide() {
-      visible.value = false
-    }
+      function hide() {
+        visible.value = false
+      }
 
-    function refreshScroll() {
-      scrollRef.value.scroll.refresh()
-    }
+      function refreshScroll() {
+        scrollRef.value.scroll.refresh()
+      }
 
-    function addQuery(s) {
-      query.value = s
-    }
+      function addQuery(s) {
+        query.value = s
+      }
 
-    function selectSongBySongList({ song }) {
-      addSong(song)
-    }
+      function selectSongBySongList({ song }) {
+        addSong(song)
+      }
 
-    function selectSongBySuggest(song) {
-      addSong(song)
-      saveSearch(query.value)
-    }
+      function selectSongBySuggest(song) {
+        addSong(song)
+        saveSearch(query.value)
+      }
 
-    function addSong(song) {
-      store.dispatch('addSong', song)
-      showMessage()
-    }
+      function addSong(song) {
+        store.dispatch('addSong', song)
+        showMessage()
+      }
 
-    function showMessage() {
-      messageRef.value.show()
-    }
+      function showMessage() {
+        messageRef.value.show()
+      }
 
-    return {
-      visible,
-      query,
-      scrollRef,
-      messageRef,
-      currentIndex,
-      searchHistory,
-      playHistory,
-      show,
-      hide,
-      addQuery,
-      selectSongBySongList,
-      selectSongBySuggest
+      return {
+        visible,
+        query,
+        scrollRef,
+        messageRef,
+        currentIndex,
+        searchHistory,
+        playHistory,
+        show,
+        hide,
+        addQuery,
+        selectSongBySongList,
+        selectSongBySuggest
+      }
     }
   }
-}
 </script>
 
 <style lang="scss" scoped>

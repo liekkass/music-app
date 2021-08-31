@@ -1,7 +1,7 @@
 import { PLAY_MODE } from '@/assets/js/constant'
 import { shuffle } from '@/assets/js/util'
 
-export function selectPlay({ commit, state }, { list, index }) {
+export function selectPlay({ commit }, { list, index }) {
   commit('setPlayMode', PLAY_MODE.sequence)
   commit('setSequenceList', list)
   commit('setPlayingState', true)
@@ -23,10 +23,8 @@ export function changeMode({ commit, state, getters }, mode) {
   const currentId = getters.currentSong.id
   if (mode === PLAY_MODE.random) {
     commit('setPlaylist', shuffle(state.sequenceList))
-  } else if (mode === PLAY_MODE.sequence) {
-    commit('setPlaylist', state.sequenceList)
   } else {
-    commit('setPlaylist', [getters.currentSong])
+    commit('setPlaylist', state.sequenceList)
   }
   const index = state.playlist.findIndex((song) => {
     return song.id === currentId

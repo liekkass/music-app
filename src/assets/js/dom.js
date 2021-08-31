@@ -1,9 +1,9 @@
-export function addClass (el, classsName) {
-  if (!el.classList.contains(classsName)) {
-    el.classList.add(classsName)
+export function addClass(el, className) {
+  if (!el.classList.contains(className)) {
+    el.classList.add(className)
   }
 }
 
-export function removeClass (el, classsName) {
-  el.classList.remove(classsName)
+export function removeClass(el, className) {
+  el.classList.remove(className)
 }

@@ -7,7 +7,7 @@
         :key="item.id"
       >
         <a :href="item.link">
-          <img :src="item.pic" alt=""/>
+          <img :src="item.pic"/>
         </a>
       </div>
     </div>
@@ -23,29 +23,29 @@
 </template>
 
 <script>
-import { ref } from 'vue'
-import useSlider from './use-slider'
+  import { ref } from 'vue'
+  import useSlider from './use-slider'
 
-export default {
-  name: 'slider',
-  props: {
-    sliders: {
-      type: Array,
-      default() {
-        return []
+  export default {
+    name: 'slider',
+    props: {
+      sliders: {
+        type: Array,
+        default() {
+          return []
+        }
+      }
+    },
+    setup() {
+      const rootRef = ref(null)
+      const { currentPageIndex } = useSlider(rootRef)
+
+      return {
+        rootRef,
+        currentPageIndex
       }
     }
-  },
-  setup() {
-    const rootRef = ref(null)
-    const { currentPageIndex } = useSlider(rootRef)
-
-    return {
-      rootRef,
-      currentPageIndex
-    }
   }
-}
 </script>
 
 <style lang="scss" scoped>
@@ -53,7 +53,6 @@ export default {
     min-height: 1px;
     font-size: 0;
     touch-action: pan-y;
-    position: relative;
     .slider-group {
       position: relative;
       overflow: hidden;

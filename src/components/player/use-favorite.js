@@ -6,7 +6,7 @@ import { FAVORITE_KEY } from '@/assets/js/constant'
 export default function useFavorite() {
   const store = useStore()
   const favoriteList = computed(() => store.state.favoriteList)
-  const maxLen = 800
+  const maxLen = 100
 
   function getFavoriteIcon(song) {
     return isFavorite(song) ? 'icon-favorite' : 'icon-not-favorite'

@@ -14,34 +14,34 @@
 </template>
 
 <script>
-export default {
-  name: 'switches',
-  props: {
-    items: {
-      type: Array,
-      default() {
-        return []
+  export default {
+    name: 'switches',
+    props: {
+      items: {
+        type: Array,
+        default() {
+          return []
+        }
+      },
+      modelValue: {
+        type: Number,
+        default: 0
       }
     },
-    modelValue: {
-      type: Number,
-      default: 0
-    }
-  },
-  computed: {
-    activeStyle() {
-      const x = 120 * this.modelValue
-      return {
-        transform: `translate3d(${x}px, 0, 0)`
+    computed: {
+      activeStyle() {
+        const x = 120 * this.modelValue
+        return {
+          transform: `translate3d(${x}px, 0, 0)`
+        }
+      }
+    },
+    methods: {
+      switchItem(index) {
+        this.$emit('update:modelValue', index)
       }
     }
-  },
-  methods: {
-    switchItem(index) {
-      this.$emit('update:modelValue', index)
-    }
   }
-}
 </script>
 
 <style scoped lang="scss">
