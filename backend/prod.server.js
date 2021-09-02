@@ -34,7 +34,7 @@ app.use(function (err, req, res, next) {
 
   // handle CSRF token errors here
   res.status(403)
-  res.send(<p>非法请求</p>)
+  res.send('<p>非法请求</p>')
 })
 
 module.exports = app.listen(port, function (err) {
